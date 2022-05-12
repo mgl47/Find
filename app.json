@@ -4,9 +4,9 @@
     "slug": "Find",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./app/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./app/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier":"com.Ling.Find",
+      "config":{
+        "googleSignIn":{
+          "reservedClientId":"com.googleusercontent.apps.612572628783-l2i3co2dieronmp7tolglt8p2ggu801h"
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -28,5 +34,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+  
   }
+  
 }
