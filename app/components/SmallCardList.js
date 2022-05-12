@@ -36,7 +36,7 @@ function SmallCardList(props) {
   ];
 
   return (
-    <View style={{ top: 60 }}>
+    <View style={{ top: 60, paddingBottom: 150 }}>
       <ScrollView showsVerticalScrollIndicator="false">
         {events.map((event, index) => (
           <View key={index}>

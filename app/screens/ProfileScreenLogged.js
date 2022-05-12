@@ -6,14 +6,20 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import { auth } from "../../firebase";
+
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppButton from "../components/AppButton";
 import LoggingScreen, { issignedin } from "../screens/LoggingScreen";
+import { auth, authentication } from "../../firebase/firebase-config";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 function ProfileScreenLogged({ navigation }) {
-  const handleSignOut = () => {
+  /* const handleSignOut = () => {
     auth
       .signOut()
       .then(() => {
@@ -30,7 +36,17 @@ function ProfileScreenLogged({ navigation }) {
       .catch((err) => {
         console.log(err);
       });
+  };*/
+
+  const SignOutUser = () => {
+    signOut(authentication)
+      .then((re) => {
+        console.log(re);
+        navigation.replace("Logging");
+      })
+      .catch((error) => alert(error.message));
   };
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -58,7 +74,6 @@ function ProfileScreenLogged({ navigation }) {
           },
         ]}
       >
-        <Text>Welcome: {auth.currentUser?.email}</Text>
         <AppButton onPress={SignOutUser} title="Sign out" color="blue" />
       </View>
 

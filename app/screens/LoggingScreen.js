@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import {
   View,
   StyleSheet,
@@ -13,11 +14,6 @@ import {
 import { auth } from "../../firebase";
 import colors from "../config/colors";
 import LoggingButton from "../components/LoggingButton";
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from "react-native-google-signin-google-signin";
 
 //export { issignedin };
 

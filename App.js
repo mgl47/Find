@@ -44,7 +44,7 @@ const StackNavigator = () => (
     />
     <Stack.Screen
       name="Logging"
-      component={LoggingScreen}
+      component={LoggingTst}
       options={{ headerShown: false }}
     />
     <Stack.Screen
