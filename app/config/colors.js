@@ -3,7 +3,7 @@ export default {
   white: "white",
   white_shade: "#FFF5EE",
   description: "#7F7F7F",
-  soft: "#D4D4D4",
-  light: "#F2F2F2",
+  soft: "#F5F5F5",
+  light: "#E8E8E8",
   black: "black",
 };

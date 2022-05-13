@@ -16,9 +16,9 @@ function CardSmall({ title, date, image, interest, city }) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 104,
+    height: 120,
     borderRadius: 20,
-    backgroundColor: colors.white,
+    backgroundColor: colors.soft,
     overflow: "hidden",
     width: "95%",
     alignSelf: "center",
@@ -27,16 +27,15 @@ const styles = StyleSheet.create({
 
   image: {
     width: 175,
-    height: 104,
+    height: 120,
     borderRadius: 20,
   },
   title: {
-    //alignSelf: "flex-end",
     fontSize: 17,
     fontWeight: "700",
-    bottom: 95,
+    bottom: 105,
     color: colors.black,
-    left: 190,
+    left: 185,
   },
 
   date: {
@@ -44,25 +43,27 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     color: colors.description,
     lineHeight: 15,
-    color: colors.description,
-    bottom: 78,
-    right: 20,
+
+    bottom: 85,
+    right: 30,
   },
   city: {
     fontSize: 13,
     alignSelf: "center",
     color: colors.description,
     lineHeight: 25,
-    color: colors.description,
-    bottom: 100,
+
+    bottom: 90,
     left: 40,
   },
   interest: {
-    alignSelf: "flex-end",
     fontSize: 13,
-    right: 40,
-    bottom: 100,
+    alignSelf: "center",
     color: colors.description,
+    lineHeight: 25,
+
+    bottom: 90,
+    left: 70,
   },
 });
 

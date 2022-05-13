@@ -41,7 +41,7 @@ function Categories(props) {
             <View
               key={index}
               style={{
-                backgroundColor: colors.soft,
+                backgroundColor: colors.light,
                 height: 30,
                 width: item.size,
 

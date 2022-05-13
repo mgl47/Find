@@ -8,15 +8,15 @@ import {
   TextInput,
   Text,
   StatusBar,
-  Button,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Search from "../components/Search";
 import Categories from "../components/Categories";
-import MediumCardList from "../components/MediumCardList";
-import SmallCardList from "../components/SmallCardList";
+import ExploreSmall from "../components/ExploreSmall";
+import MediumExplore from "../components/MediumExplore";
 
 function ExploreScreen({ navigation }) {
   const [search, setSearch] = useState("");
@@ -62,7 +62,7 @@ function ExploreScreen({ navigation }) {
           Nearby
         </Text>
 
-        <MediumCardList />
+        <MediumExplore />
 
         <Video
           style={{
@@ -74,7 +74,9 @@ function ExploreScreen({ navigation }) {
             top: 40,
           }}
           ref={video}
-          //source={{ uri: "https://www.youtube.com/watch?v=bP15cjXxLLQ" }}
+          /* source={{
+            uri: "https://situla.bitbit.net/filebin/c2cff88656b53e1acf462a637975eb917245bedca579517df2c3e4de340fad5d/ae1378d39b36366183bb9d7cd8307b993a40c2c79600999ea32032bf588601e6?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=HZXB1J7T0UN34UN512IW%2F20220513%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220513T110009Z&X-Amz-Expires=30&X-Amz-SignedHeaders=host&response-cache-control=max-age%3D30&response-content-disposition=filename%3D%22rolling_trailer.mp4%22&response-content-type=video%2Fmp4&X-Amz-Signature=047c3f1d1c0b9bd544c2ce066c69121af0f5e50b39b5da4b419ca6bb6e2b725f2",
+          }}*/
           source={require("../assets/rolling_trailer.mp4")}
           isMuted
           resizeMode="contain"
@@ -92,12 +94,16 @@ function ExploreScreen({ navigation }) {
             alignSelf: "center",
           }}
         >
-          <Button
+          <TouchableOpacity
+            style={[styles.button, styles.buttonOutline]}
             onPress={() => navigation.navigate("Rolling")}
-            title="Tune in"
-            color={"white"}
-            fontWeight={"500"}
-          ></Button>
+          >
+            <Text
+              style={{ fontWeight: "600", fontSize: 18, color: colors.blue }}
+            >
+              Tune in
+            </Text>
+          </TouchableOpacity>
         </View>
         <Text
           style={{
@@ -111,7 +117,7 @@ function ExploreScreen({ navigation }) {
           Free Events
         </Text>
 
-        <SmallCardList />
+        <ExploreSmall />
       </ScrollView>
     </View>
   );
@@ -122,10 +128,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.ligh,
+    backgroundColor: colors.white,
   },
   Search: {
-    backgroundColor: colors.soft,
+    backgroundColor: colors.light,
 
     width: "95%",
     height: 40,
@@ -137,8 +143,22 @@ const styles = StyleSheet.create({
   },
   TextImput: {
     fontSize: 18,
-    color: colors.description,
+    color: colors.light,
     padding: 10,
+  },
+  button: {
+    backgroundColor: colors.blue,
+    width: 200,
+    height: 52,
+    padding: 15,
+    borderRadius: 30,
+    alignItems: "center",
+  },
+  buttonOutline: {
+    backgroundColor: "white",
+    marginTop: 5,
+    borderColor: colors.blue,
+    borderWidth: 2,
   },
 });
 

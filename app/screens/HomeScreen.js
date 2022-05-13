@@ -13,6 +13,8 @@ import CardMedium from "../components/CardMedium";
 import CardBig from "../components/CardBig";
 import CardSmall from "../components/CardSmall";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MediumHome from "../components/MediumHome";
+import HomeSmall from "../components/HomeSmall";
 
 function HomeScreen({ navigation }) {
   return (
@@ -26,128 +28,49 @@ function HomeScreen({ navigation }) {
       <ScrollView style={{}} showsVerticalScrollIndicator="false">
         <Text
           style={{
-            top: 8,
+            top: 10,
             left: 10,
             fontSize: 20,
             fontWeight: "600",
-            paddingBottom: 15,
           }}
         >
           Trending in your area
         </Text>
 
-        <ScrollView
-          style={{}}
-          horizontal
-          showsHorizontalScrollIndicator="false"
-        >
-          <TouchableOpacity onPress={() => navigation.navigate("Rolling")}>
-            <CardMedium
-              title="Rolling Loud Portugal"
-              date=" Wed, 06-08 Jul - 3:00 pm"
-              city="Portimao"
-              image={require("../assets/Events/Rolling.jpg")}
-              Category={"Musical Festival"}
-            />
-          </TouchableOpacity>
-          <CardMedium
-            title="Rest One Dance"
-            date=" Fri, 27 May - 10:00 pm"
-            city="Porto"
-            image={require("../assets/Events/rest_one_dance.jpg")}
-            Category={"Dance"}
-          />
-
-          <CardMedium
-            title="Science Week"
-            date=" Mon, 6 June - 10:00 am"
-            city="Porto"
-            image={require("../assets/Events/science_week.jpg")}
-            Category={"Education"}
-          />
-          <CardMedium
-            title="Color Content"
-            date=" Thu, 14 July - 3:00 pm"
-            city="Porto"
-            image={require("../assets/Events/color_content.jpg")}
-            Category={"Art"}
-          />
-        </ScrollView>
+        <MediumHome />
 
         <Text
           style={{
-            top: 15,
+            top: 40,
             left: 10,
             fontSize: 20,
             fontWeight: "600",
-            paddingBottom: 25,
+            paddingBottom: 50,
           }}
         >
-          Upcoming Events
+          Upcoming Event
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
           <CardBig
             title="Photography Workshop"
             date=" Sun, 29 May - 3:00 pm
 Wroclaw"
-            image={require("../assets/Events/photography_workshop.jpg")}
+            image={{
+              uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+            }}
           />
         </TouchableOpacity>
-
         <Text
           style={{
             top: 15,
             left: 10,
             fontSize: 20,
             fontWeight: "600",
-            paddingBottom: 25,
           }}
         >
           Recommended for you
         </Text>
-        <TouchableOpacity>
-          <CardSmall
-            title="Sun7ven"
-            date=" Sat, 28 May - 4:00 pm
-"
-            city="Porto"
-            image={require("../assets/Events/sun7ven.jpg")}
-            interest="36 people are going"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <CardSmall
-            title="Space X"
-            date=" Sun, 5 June - 1:00 pm
-"
-            city="Porto"
-            image={require("../assets/Events/space_x.jpg")}
-            interest="74 people are going"
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <CardSmall
-            title="Cookies Stap"
-            date=" Wed, 25 May - 4:00 pm
-"
-            city="Porto"
-            image={require("../assets/Events/cookies_stap.jpg")}
-            interest="21 people are going"
-          />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Explore")}
-          style={styles.exbuttom}
-        >
-          <Text style={styles.exText}> Go to Explore</Text>
-          <MaterialCommunityIcons
-            style={{ alignSelf: "flex-end", position: "absolute", right: 10 }}
-            name="arrow-right"
-            size={24}
-            color="black"
-          />
-        </TouchableOpacity>
+        <HomeSmall></HomeSmall>
       </ScrollView>
     </View>
   );
@@ -158,8 +81,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.light,
-    paddingTop: 115,
+    backgroundColor: colors.white,
+    paddingTop: 110,
     //padding: 10,
   },
   logo: {

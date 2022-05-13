@@ -22,7 +22,7 @@
     "@react-navigation/stack": "^6.2.1",
     "angularfire2": "^5.4.2",
     "expo": "^45.0.2",
-    "expo-auth-session": "~3.6.0",
+    "expo-auth-session": "~3.6.1",
     "expo-av": "~11.2.3",
     "expo-google-sign-in": "~10.2.0",
     "expo-random": "~12.2.0",

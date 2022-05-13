@@ -38,7 +38,9 @@ function Rolling({ navigation, navigation: { goBack } }) {
 Porto"
         price="zł1638.73+"
         interest="754 people are going"
-        image={require("../../assets/Events/Rolling.jpg")}
+        image={{
+          uri: "https://media.resources.festicket.com/www/photos/RollingLoud-Artwork_VJlP2vC.jpg",
+        }}
       />
 
       <View>

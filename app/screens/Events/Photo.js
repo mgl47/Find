@@ -38,7 +38,9 @@ function Photo({ navigation, navigation: { goBack } }) {
 Porto"
         price="zł100"
         interest="54 people are going"
-        image={require("../../assets/Events/photography_workshop.jpg")}
+        image={{
+          uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+        }}
       />
 
       <View>

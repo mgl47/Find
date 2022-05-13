@@ -42,6 +42,7 @@ function LoggingTst({ navigation }) {
       .then((re) => {
         console.log(re);
         SetIsSignedIn(true);
+        navigation.replace("home");
       })
       .catch((error) => alert(error.message));
   };
@@ -194,7 +195,7 @@ function LoggingTst({ navigation }) {
           width: 110,
           height: 30,
           bottom: 25,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -225,7 +226,7 @@ function LoggingTst({ navigation }) {
           width: 120,
           height: 30,
           bottom: 30,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -249,6 +250,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.white,
   },
   inputContainer: {
     width: 300,
@@ -259,6 +261,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 200,
     height: 200,
+
     //   position:'absolute',
     top: 60,
     alignSelf: "center",
@@ -267,16 +270,17 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "500",
     top: 30,
+    color: colors.black,
+    zIndex: 999,
   },
   input: {
-    backgroundColor: colors.soft,
+    backgroundColor: colors.light,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 30,
     marginTop: 5,
   },
   buttonContainer: {
-    backgroundColor: colors.light,
     borderBottomColor: colors.description,
     width: "60%",
     justifyContent: "center",
@@ -310,4 +314,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
 export default LoggingTst;
