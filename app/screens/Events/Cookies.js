@@ -15,7 +15,7 @@ import Card from "../../components/Card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-function Photo({ navigation, navigation: { goBack } }) {
+function Cookies({ navigation, navigation: { goBack } }) {
   return (
     <View
       style={{
@@ -34,7 +34,7 @@ function Photo({ navigation, navigation: { goBack } }) {
         title="Photography Workshop"
         date=" Sun, 29 May - 3:00 pm
 Porto"
-        price="zł70"
+        price="zł100"
         interest="54 people are going"
         image={{
           uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
@@ -190,4 +190,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Photo;
+export default Cookies;

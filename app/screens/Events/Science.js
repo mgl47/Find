@@ -15,7 +15,7 @@ import Card from "../../components/Card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-function Photo({ navigation, navigation: { goBack } }) {
+function Science({ navigation, navigation: { goBack } }) {
   return (
     <View
       style={{
@@ -31,20 +31,21 @@ function Photo({ navigation, navigation: { goBack } }) {
       ></Image>
       <StatusBar barStyle="dark-content" />
       <Card
-        title="Photography Workshop"
-        date=" Sun, 29 May - 3:00 pm
-Porto"
-        price="zł70"
+        title="Science Week"
+        date=" Mon, 6-12 June - 10:00 am
+Wroclaw"
+        price="zł35"
         interest="54 people are going"
         image={{
-          uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+          uri: "https://images.unsplash.com/photo-1553714198-c9d2ecdfe675?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         }}
       />
 
       <View>
         <Text style={styles.description}>
-          The photography week, which brings together several world
-          photographers from some parts of the world.
+          A whole week of special exhibitions, scientific classes and final
+          event competition. Everything starts with a drop of water, we'll show
+          you how!
         </Text>
         <Text
           style={{
@@ -108,7 +109,12 @@ Porto"
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker coordinate={{ latitude: 51.109387, longitude: 17.029301 }} />
+        <Marker
+          coordinate={{
+            latitude: 51.10422820566327,
+            longitude: 17.056638657096403,
+          }}
+        />
       </MapView>
 
       <View
@@ -190,4 +196,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Photo;
+export default Science;

@@ -10,53 +10,43 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
+
 import colors from "../config/colors";
 import LoggingButton from "../components/LoggingButton";
-import { authentication } from "../../firebase/firebase-config";
+import { auth, authentication } from "../../firebase/firebase-config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 
-function LoggingTst({ navigation }) {
-  const [name, setName] = useState("");
+//1086373311684-npd5t5fggcrq1dsg284csbgs7snsr22f.apps.googleusercontent.com
 
+function SignUp({ navigation }) {
   const [isSignedIn, SetIsSignedIn] = useState(false);
-
   const [email, SetEmail] = useState("");
   const [password, SetPassword] = useState("");
+
+  const [loggedIn, setloggedIn] = useState(false);
+  const [userInfo, setuserInfo] = useState([]);
 
   const RegisterUser = () => {
     createUserWithEmailAndPassword(authentication, email, password)
       .then((re) => {
         console.log(re);
         SetIsSignedIn(true);
+        navigation.replace("home");
       })
-      .catch((re) => {
-        console.log(re);
-      });
+      .catch((error) => alert(error.message));
   };
 
-  const SignInUser = () => {
-    signInWithEmailAndPassword(authentication, email, password)
-      .then((re) => {
-        console.log(re);
-        SetIsSignedIn(true);
-      })
-      .catch((err) => {
-        console.log(re);
-      });
-  };
   const SignOutUser = () => {
     signOut(authentication)
       .then((re) => {
         console.log(re);
         SetIsSignedIn(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((error) => alert(error.message));
   };
   useEffect(() => {
     const unsubscribe = authentication.onAuthStateChanged((isSignedIn) => {
@@ -68,7 +58,6 @@ function LoggingTst({ navigation }) {
     return unsubscribe;
   }, []);
 
-  <UserContext.Provider> {isSignedIn}</UserContext.Provider>;
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" />
@@ -100,19 +89,14 @@ function LoggingTst({ navigation }) {
           />
         </View>
 
-        {isSignedIn === true ? (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={SignOutUser} style={styles.button}>
-              <Text style={styles.buttonText}>log out</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={SignInUser} style={styles.button}>
-              <Text style={styles.buttonText}>log in</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+        <View style={[styles.buttonContainer]}>
+          <TouchableOpacity
+            onPress={RegisterUser}
+            style={[styles.button, styles.buttonOutline]}
+          >
+            <Text style={styles.buttonText}>Sign up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View
@@ -121,7 +105,7 @@ function LoggingTst({ navigation }) {
           position: "absolute",
           alignSelf: "center",
           padding: 10,
-          bottom: 300,
+          bottom: 270,
         }}
       >
         <LoggingButton
@@ -131,7 +115,7 @@ function LoggingTst({ navigation }) {
               "Make sure your device is connected to the internet"
             )
           }
-          title="Continue with Google"
+          title="Sign up with Google"
           color="soft"
           image={require("../assets/Events/google.png")}
         />
@@ -142,7 +126,7 @@ function LoggingTst({ navigation }) {
           position: "absolute",
           alignSelf: "center",
           padding: 10,
-          bottom: 230,
+          bottom: 200,
         }}
       >
         <LoggingButton
@@ -152,23 +136,15 @@ function LoggingTst({ navigation }) {
               "Make sure your device is connected to the internet"
             )
           }
-          title="Continue with Facebook"
+          title="Sign up with Facebook"
           color="soft"
           image={require("../assets/Events/facebook.png")}
         />
       </View>
-      <TouchableOpacity style={{ position: "absolute", bottom: 215 }}>
-        <Text
-          style={{ color: colors.blue }}
-          onPress={() => navigation.navigate("Registration")}
-        >
-          {" "}
-          Don't have an account? Create here
-        </Text>
-      </TouchableOpacity>
+
       <TouchableOpacity
         style={{
-          bottom: 60,
+          bottom: 50,
         }}
         onPress={() => navigation.navigate("home")}
       >
@@ -179,7 +155,7 @@ function LoggingTst({ navigation }) {
             color: colors.blue,
           }}
         >
-          Sign in later
+          Sign up later
         </Text>
       </TouchableOpacity>
 
@@ -191,7 +167,7 @@ function LoggingTst({ navigation }) {
           color: colors.black,
         }}
       >
-        By signing up or signing in, I agree to Find
+        By signing up, I agree to Find
       </Text>
 
       <TouchableOpacity
@@ -200,7 +176,7 @@ function LoggingTst({ navigation }) {
           width: 110,
           height: 30,
           bottom: 25,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -231,7 +207,7 @@ function LoggingTst({ navigation }) {
           width: 120,
           height: 30,
           bottom: 30,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -255,35 +231,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.white,
   },
   inputContainer: {
     width: 300,
 
-    bottom: 100,
+    bottom: 130,
   },
   logo: {
     resizeMode: "contain",
     width: 200,
     height: 200,
+
     //   position:'absolute',
-    top: 60,
+    top: -20,
     alignSelf: "center",
   },
   slogan: {
     fontSize: 17,
     fontWeight: "500",
-    top: 30,
+    top: -40,
+    color: colors.black,
+    zIndex: 999,
   },
   input: {
-    backgroundColor: colors.soft,
+    backgroundColor: colors.light,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 30,
     marginTop: 5,
   },
   buttonContainer: {
-    backgroundColor: colors.light,
-    borderBottomColor: colors.description,
+    borderBottomColor: colors.blue,
     width: "60%",
     justifyContent: "center",
     alignItems: "center",
@@ -293,7 +272,149 @@ const styles = StyleSheet.create({
 
   button: {
     backgroundColor: colors.blue,
-    width: 300,
+    width: 250,
+    height: 52,
+    padding: 15,
+    borderRadius: 30,
+    alignItems: "center",
+    bottom: 20,
+  },
+  buttonOutline: {
+    backgroundColor: colors.white,
+    marginTop: 5,
+    borderColor: colors.blue,
+    borderWidth: 2,
+  },
+  buttonText: {
+    color: colors.blue,
+    fontWeight: "600",
+    fontSize: 15,
+  },
+  buttonOutlineText: {
+    color: colors.blue,
+    fontWeight: "700",
+    fontSize: 16,
+  },
+});
+
+export default SignUp;
+
+/*import React, { useEffect, useState } from "react";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity,
+  Alert,
+  StatusBar,
+  KeyboardAvoidingView,
+  TextInput,
+} from "react-native";
+import { auth } from "../../firebase";
+import colors from "../config/colors";
+import LoggingButton from "../components/LoggingButton";
+
+function Registration({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigation.replace("home");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const handleSignUp = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password, name)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        console.log("Registered with:", user.email);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  return (
+    <View style={styles.container}>
+      <StatusBar barStyle="dark-content" />
+
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <View style={styles.inputContainer}>
+          <TextInput
+            placeholder="Name"
+            value={name}
+            onChangeText={(text) => setName(text)}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Password"
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            style={styles.input}
+            secureTextEntry
+          />
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={handleSignUp}
+            style={[styles.button, styles.buttonOutline]}
+          >
+            <Text style={styles.buttonOutlineText}>Register</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+
+      <TouchableOpacity
+        style={{ bottom: 200 }}
+        onPress={() => navigation.navigate("home")}
+      >
+        <Text styles={{ fontSize: 40, color: colors.black }}>Sign later</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  inputContainer: {
+    width: 170,
+  },
+  input: {
+    backgroundColor: colors.description,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 10,
+    marginTop: 5,
+  },
+  buttonContainer: {
+    backgroundColor: colors.light,
+    borderBottomColor: colors.description,
+    width: "60%",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 5,
+  },
+
+  button: {
+    backgroundColor: colors.blue,
+    width: 200,
     height: 52,
     padding: 15,
     borderRadius: 30,
@@ -307,8 +428,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontWeight: "600",
-    fontSize: 15,
+    fontWeight: "700",
+    fontSize: 16,
   },
   buttonOutlineText: {
     color: colors.blue,
@@ -316,4 +437,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-export default LoggingTst;
+
+export default Registration;
+*/

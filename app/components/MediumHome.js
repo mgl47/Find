@@ -18,12 +18,13 @@ function MediumCardList({}) {
     },
     {
       title: "Rest One Dance",
-      date: "Fri, 27 May - 10:00 pm",
+      date: "Thu, 26 May - 7:00 pm",
       city: "Porto",
       image: {
         uri: "https://images.unsplash.com/photo-1443745029291-d5c27bc0b562?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       },
       Category: "Dance",
+      onPress: "Rest",
     },
     {
       title: "Starladder Major 2022",
@@ -33,6 +34,7 @@ function MediumCardList({}) {
         uri: "https://esports-betting-tips.com/wp-content/uploads/2021/07/CSGO-Hall-Of-Fame-Top-5-Teams-Of-All-Time.jpg",
       },
       Category: "E-Sport",
+      onPress: "Cs",
     },
 
     {

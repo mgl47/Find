@@ -52,7 +52,7 @@ function ProfileScreen({ navigation }) {
         ]}
       >
         <AppButton
-          onPress={() => navigation.navigate("Logging")}
+          onPress={() => navigation.navigate("Sign In")}
           title="Log in"
           color="blue"
         />

@@ -11,7 +11,7 @@ import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppButton from "../components/AppButton";
 import { authentication } from "../../firebase/firebase-config";
-import tst from "./LoggingTst";
+
 import { signOut } from "firebase/auth";
 
 function ProfileScreenLogged({ navigation }) {

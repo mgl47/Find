@@ -15,7 +15,7 @@ import Card from "../../components/Card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-function Photo({ navigation, navigation: { goBack } }) {
+function Drake({ navigation, navigation: { goBack } }) {
   return (
     <View
       style={{
@@ -31,20 +31,20 @@ function Photo({ navigation, navigation: { goBack } }) {
       ></Image>
       <StatusBar barStyle="dark-content" />
       <Card
-        title="Photography Workshop"
-        date=" Sun, 29 May - 3:00 pm
-Porto"
-        price="zł70"
-        interest="54 people are going"
+        title="Drake - CLB Tour"
+        date=" Fri, 08 Jul - 9:00 pm
+Warsaw"
+        price="zł350"
+        interest="7,683 people are going"
         image={{
-          uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+          uri: "https://d31029zd06w0t6.cloudfront.net/wp-content/uploads/sites/54/2020/03/web1_124600307-01b166fa1c6e467ea3704fa18d838605.jpg",
         }}
       />
 
       <View>
         <Text style={styles.description}>
-          The photography week, which brings together several world
-          photographers from some parts of the world.
+          Don't miss the chance to jam to all the hits from ChampagnePapi's last
+          album Certified Lover Boy, and much more with Special Guests!
         </Text>
         <Text
           style={{
@@ -108,7 +108,12 @@ Porto"
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker coordinate={{ latitude: 51.109387, longitude: 17.029301 }} />
+        <Marker
+          coordinate={{
+            latitude: 52.23953922579044,
+            longitude: 21.04578017103711,
+          }}
+        />
       </MapView>
 
       <View
@@ -190,4 +195,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Photo;
+export default Drake;

@@ -15,7 +15,7 @@ import Card from "../../components/Card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-function Photo({ navigation, navigation: { goBack } }) {
+function Cs({ navigation, navigation: { goBack } }) {
   return (
     <View
       style={{
@@ -32,19 +32,20 @@ function Photo({ navigation, navigation: { goBack } }) {
       <StatusBar barStyle="dark-content" />
       <Card
         title="Photography Workshop"
-        date=" Sun, 29 May - 3:00 pm
+        date=" Fri, 27-29 May - 5:00 pm
 Porto"
-        price="zł70"
-        interest="54 people are going"
+        price="zł100"
+        interest="954 people are going"
         image={{
-          uri: "https://images.unsplash.com/photo-1553249067-9571db365b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
+          uri: "https://esports-betting-tips.com/wp-content/uploads/2021/07/CSGO-Hall-Of-Fame-Top-5-Teams-Of-All-Time.jpg",
         }}
       />
 
       <View>
         <Text style={styles.description}>
-          The photography week, which brings together several world
-          photographers from some parts of the world.
+          Take part on the biggest Cs:Go tournament this time in Berln brought
+          to you by StarLadder. Come join all the best teams in this Major
+          Championship Edition!
         </Text>
         <Text
           style={{
@@ -108,7 +109,12 @@ Porto"
           longitudeDelta: 0.0421,
         }}
       >
-        <Marker coordinate={{ latitude: 51.109387, longitude: 17.029301 }} />
+        <Marker
+          coordinate={{
+            latitude: 52.50650039477349,
+            longitude: 13.443653055776572,
+          }}
+        />
       </MapView>
 
       <View
@@ -140,7 +146,7 @@ Porto"
 const styles = StyleSheet.create({
   description: {
     fontFamily: "System",
-    fontSize: 16,
+    fontSize: 14.5,
     color: colors.description,
     top: -10,
     position: "absolute",
@@ -190,4 +196,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Photo;
+export default Cs;

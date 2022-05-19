@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Alert,
   StatusBar,
-  goBack,
   Linking,
   Image,
 } from "react-native";
@@ -17,7 +16,7 @@ import Card from "../../components/Card";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-function Rolling({ navigation, navigation: { goBack } }) {
+function Rolling({ navigation, navigation: { goBack }, title, date }) {
   return (
     <View
       style={{
@@ -35,9 +34,9 @@ function Rolling({ navigation, navigation: { goBack } }) {
       <Card
         title="Rolling Loud Portugal"
         date=" Wed, 06-08 Jul - 3:00 pm
-Porto"
+Portimao"
         price="zł1638.73+"
-        interest="754 people are going"
+        interest="10,754 people are going"
         image={{
           uri: "https://media.resources.festicket.com/www/photos/RollingLoud-Artwork_VJlP2vC.jpg",
         }}
@@ -45,8 +44,9 @@ Porto"
 
       <View>
         <Text style={styles.description}>
-          The world biggest hip hop festival has finally arrived in Europe. COME
-          GET LIT!!!
+          The world biggest hip hop festival has finally arrived in Europe. 3
+          days of rage with artists like Travis Scott, Future, Trippie Redd and
+          much more. COME GET LIT!!!
         </Text>
         <Text
           style={{
@@ -140,7 +140,7 @@ Porto"
 const styles = StyleSheet.create({
   description: {
     fontFamily: "System",
-    fontSize: 16,
+    fontSize: 14,
     color: colors.description,
     top: -10,
     position: "absolute",

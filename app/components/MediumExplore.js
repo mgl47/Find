@@ -13,6 +13,7 @@ function MediumExplore({}) {
         uri: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       },
       Category: "Food",
+      onPress: "Long",
     },
     {
       title: "Drake - CLB Tour",
@@ -22,6 +23,7 @@ function MediumExplore({}) {
         uri: "https://d31029zd06w0t6.cloudfront.net/wp-content/uploads/sites/54/2020/03/web1_124600307-01b166fa1c6e467ea3704fa18d838605.jpg",
       },
       Category: "Music",
+      onPress: "Drake",
     },
 
     {
@@ -32,6 +34,7 @@ function MediumExplore({}) {
         uri: "https://images.unsplash.com/photo-1553714198-c9d2ecdfe675?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       },
       Category: "Education",
+      onPress: "Science",
     },
   ];
 

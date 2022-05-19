@@ -4,7 +4,7 @@ import react from "react";
 import { View, StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { auth } from "../Find/firebase";
 import React, { useEffect, useState } from "react";
 
@@ -14,23 +14,28 @@ import ProfileScreen from "./app/screens/ProfileScreen";
 import ExploreScreen from "./app/screens/ExploreScreen";
 import FavoriteScreen from "./app/screens/FavoriteScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import LoggingScreen from "./app/screens/LoggingScreen";
+import SignIn from "./app/screens/SignIn";
 import Rolling from "./app/screens/Events/Rolling";
 import Photo from "./app/screens/Events/Photo";
+import SignUp from "./app/screens/SignUp";
+import Terms from "./app/screens/Terms";
+import Priv from "./app/screens/Priv";
 
 import LoggingTst from "./app/screens/LoggingTst";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Terms from "./app/screens/Terms";
-import Priv from "./app/screens/Priv";
 
 import colors from "./app/config/colors";
-import Registration from "./app/screens/Registration";
+import Science from "./app/screens/Events/Science";
+import Long from "./app/screens/Events/Long";
+import Rest from "./app/screens/Events/Rest";
+import Cs from "./app/screens/Events/Cs";
+import Drake from "./app/screens/Events/Drake";
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => (
-  <Stack.Navigator initialRouteName="Logging">
+  <Stack.Navigator initialRouteName="Sign In">
     <Stack.Screen
       name="home"
       component={TabNavigator}
@@ -39,12 +44,12 @@ const StackNavigator = () => (
 
     <Stack.Screen
       name="Profile"
-      component={ProfileScreenLogged}
+      component={ProfileScreen}
       options={{ headerShown: false }}
     />
     <Stack.Screen
-      name="Logging"
-      component={LoggingTst}
+      name="Sign In"
+      component={SignIn}
       options={{ headerShown: false }}
     />
     <Stack.Screen
@@ -52,7 +57,11 @@ const StackNavigator = () => (
       component={WelcomeScreen}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Registration" component={Registration} />
+    <Stack.Screen
+      name="Sign Up"
+      component={SignUp}
+      options={{ headerTintColor: colors.blue }}
+    />
     <Stack.Screen
       name="Photo"
       component={Photo}
@@ -63,8 +72,37 @@ const StackNavigator = () => (
       component={Rolling}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Terms of Use" component={Terms} />
-    <Stack.Screen name="Privacy Policy" component={Priv} />
+    <Stack.Screen
+      name="Science"
+      component={Science}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Long"
+      component={Long}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Drake"
+      component={Drake}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Rest"
+      component={Rest}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen name="Cs" component={Cs} options={{ headerShown: false }} />
+    <Stack.Screen
+      name="Terms of Use"
+      component={Terms}
+      options={{ headerTintColor: colors.blue }}
+    />
+    <Stack.Screen
+      name="Privacy Policy"
+      component={Priv}
+      options={{ headerTintColor: colors.blue }}
+    />
   </Stack.Navigator>
 );
 
@@ -119,8 +157,8 @@ const TabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="Profile1"
-      component={ProfileScreenLogged}
+      name="Profile"
+      component={ProfileScreen}
       options={{
         headerShown: false,
         tabBarIcon: ({ size, color }) => (

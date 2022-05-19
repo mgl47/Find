@@ -33,7 +33,7 @@ function FavoriteScreen({ navigation }) {
             color: colors.description,
           }}
         >
-          Create an account to save your favorite events
+          Create an account or log in to save your favorite events
         </Text>
       </View>
 
@@ -42,7 +42,7 @@ function FavoriteScreen({ navigation }) {
       </View>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate("Logging")}
+        onPress={() => navigation.navigate("Sign In")}
         style={{
           justifyContent: "center",
           alignItems: "center",

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import {
   View,
   StyleSheet,
@@ -11,120 +10,52 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from "react-native";
-import { auth } from "../../firebase";
+
 import colors from "../config/colors";
 import LoggingButton from "../components/LoggingButton";
+import { auth, authentication } from "../../firebase/firebase-config";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
-//export { issignedin };
+//1086373311684-npd5t5fggcrq1dsg284csbgs7snsr22f.apps.googleusercontent.com
 
-function LoggingScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+function SignIn({ navigation }) {
+  const [isSignedIn, SetIsSignedIn] = useState(false);
+  const [email, SetEmail] = useState("");
+  const [password, SetPassword] = useState("");
 
+  const [loggedIn, setloggedIn] = useState(false);
+  const [userInfo, setuserInfo] = useState([]);
+
+  const SignInUser = () => {
+    signInWithEmailAndPassword(authentication, email, password)
+      .then((re) => {
+        console.log(re);
+        SetIsSignedIn(true);
+        navigation.replace("home");
+      })
+      .catch((error) => alert(error.message));
+  };
+  const SignOutUser = () => {
+    signOut(authentication)
+      .then((re) => {
+        console.log(re);
+        SetIsSignedIn(false);
+      })
+      .catch((error) => alert(error.message));
+  };
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+    const unsubscribe = authentication.onAuthStateChanged((isSignedIn) => {
+      if (isSignedIn) {
         navigation.replace("home");
       }
     });
 
     return unsubscribe;
   }, []);
-
-  const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Logged in with:", user.email);
-      })
-      .catch((error) => alert(error.message));
-  };
-
-  const [userInfo, setUserInfo] = useState(null);
-  const [gettingLoginStatus, setGettingLoginStatus] = useState(true);
-
-  useEffect(() => {
-    // Initial configuration
-    GoogleSignin.configure({
-      // Mandatory method to call before calling signIn()
-      scopes: ["https://www.googleapis.com/auth/drive.readonly"],
-      // Repleace with your webClientId
-      // Generated from Firebase console
-      webClientId:
-        "1086373311684-npd5t5fggcrq1dsg284csbgs7snsr22f.apps.googleusercontent.com",
-    });
-    // Check if user is already signed in
-    _isSignedIn();
-  }, []);
-
-  const _isSignedIn = async () => {
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
-      alert("User is already signed in");
-      // Set User Info if user is already signed in
-      _getCurrentUserInfo();
-    } else {
-      console.log("Please Login");
-    }
-    setGettingLoginStatus(false);
-  };
-
-  const _getCurrentUserInfo = async () => {
-    try {
-      let info = await GoogleSignin.signInSilently();
-      console.log("User Info --> ", info);
-      setUserInfo(info);
-    } catch (error) {
-      if (error.code === statusCodes.SIGN_IN_REQUIRED) {
-        alert("User has not signed in yet");
-        console.log("User has not signed in yet");
-      } else {
-        alert("Unable to get user's info");
-        console.log("Unable to get user's info");
-      }
-    }
-  };
-
-  const _signIn = async () => {
-    // It will prompt google Signin Widget
-    try {
-      await GoogleSignin.hasPlayServices({
-        // Check if device has Google Play Services installed
-        // Always resolves to true on iOS
-        showPlayServicesUpdateDialog: true,
-      });
-      const userInfo = await GoogleSignin.signIn();
-      console.log("User Info --> ", userInfo);
-      setUserInfo(userInfo);
-    } catch (error) {
-      console.log("Message", JSON.stringify(error));
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        alert("User Cancelled the Login Flow");
-      } else if (error.code === statusCodes.IN_PROGRESS) {
-        alert("Signing In");
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        alert("Play Services Not Available or Outdated");
-      } else {
-        alert(error.message);
-      }
-    }
-  };
-
-  const _signOut = async () => {
-    setGettingLoginStatus(true);
-    // Remove user session from the device.
-    try {
-      await GoogleSignin.revokeAccess();
-      await GoogleSignin.signOut();
-      // Removing user Info
-      setUserInfo(null);
-    } catch (error) {
-      console.error(error);
-    }
-    setGettingLoginStatus(false);
-  };
 
   return (
     <View style={styles.container}>
@@ -141,27 +72,35 @@ function LoggingScreen({ navigation }) {
       <View style={styles.container} behavior="padding">
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Email"
+            placeholder="email"
             placeholderTextColor="#7F7F7F"
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => SetEmail(text)}
             style={styles.input}
           />
           <TextInput
             placeholder="Password"
             placeholderTextColor="#7F7F7F"
             value={password}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => SetPassword(text)}
             style={styles.input}
             secureTextEntry
           />
         </View>
 
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={handleLogin} style={styles.button}>
-            <Text style={styles.buttonText}>Login with email</Text>
-          </TouchableOpacity>
-        </View>
+        {isSignedIn === true ? (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={SignOutUser} style={styles.button}>
+              <Text style={styles.buttonText}>log out</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity onPress={SignInUser} style={styles.button}>
+              <Text style={styles.buttonText}>log in</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
 
       <View
@@ -174,8 +113,13 @@ function LoggingScreen({ navigation }) {
         }}
       >
         <LoggingButton
-          onPress={_signIn}
-          title="Continue with Google"
+          onPress={() =>
+            Alert.alert(
+              "No internet connection",
+              "Make sure your device is connected to the internet"
+            )
+          }
+          title="Sign with Google"
           color="soft"
           image={require("../assets/Events/google.png")}
         />
@@ -196,7 +140,7 @@ function LoggingScreen({ navigation }) {
               "Make sure your device is connected to the internet"
             )
           }
-          title="Continue with Facebook"
+          title="Sign with Facebook"
           color="soft"
           image={require("../assets/Events/facebook.png")}
         />
@@ -204,9 +148,8 @@ function LoggingScreen({ navigation }) {
       <TouchableOpacity style={{ position: "absolute", bottom: 215 }}>
         <Text
           style={{ color: colors.blue }}
-          onPress={() => navigation.navigate("Registration")}
+          onPress={() => navigation.navigate("Sign Up")}
         >
-          {" "}
           Don't have an account? Create here
         </Text>
       </TouchableOpacity>
@@ -235,7 +178,7 @@ function LoggingScreen({ navigation }) {
           color: colors.black,
         }}
       >
-        By signing up or signing in, I agree to Find
+        By signing in, I agree to Find
       </Text>
 
       <TouchableOpacity
@@ -244,7 +187,7 @@ function LoggingScreen({ navigation }) {
           width: 110,
           height: 30,
           bottom: 25,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -275,7 +218,7 @@ function LoggingScreen({ navigation }) {
           width: 120,
           height: 30,
           bottom: 30,
-          backgroundColor: colors.light,
+          backgroundColor: colors.white,
           alignItems: "center",
         }}
       >
@@ -299,6 +242,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: colors.white,
   },
   inputContainer: {
     width: 300,
@@ -309,6 +253,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 200,
     height: 200,
+
     //   position:'absolute',
     top: 60,
     alignSelf: "center",
@@ -317,16 +262,17 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "500",
     top: 30,
+    color: colors.black,
+    zIndex: 999,
   },
   input: {
-    backgroundColor: colors.soft,
+    backgroundColor: colors.light,
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 30,
     marginTop: 5,
   },
   buttonContainer: {
-    backgroundColor: colors.light,
     borderBottomColor: colors.description,
     width: "60%",
     justifyContent: "center",
@@ -337,7 +283,7 @@ const styles = StyleSheet.create({
 
   button: {
     backgroundColor: colors.blue,
-    width: 300,
+    width: 250,
     height: 52,
     padding: 15,
     borderRadius: 30,
@@ -361,4 +307,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoggingScreen;
+export default SignIn;
